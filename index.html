@@ -3,10 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My GitHub Page</title>
+    <title>Theme Selector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            margin: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My GitHub Page!</h1>
-    <p>This is a simple example website.</p>
+
+<header>
+    <h1>Welcome to the Theme Selector</h1>
+</header>
+
+<div class="container">
+    <div id="main-buttons">
+        <button class="btn" onclick="showSubButtons('math')">Math</button>
+        <button class="btn" onclick="showSubButtons('coding')">Coding</button>
+        <button class="btn" onclick="showSubButtons('science')">Science</button>
+    </div>
+
+    <div id="math-buttons" class="hidden">
+        <button class="btn" onclick="alert('Geometry')">Geometry</button>
+        <button class="btn" onclick="alert('Contest Math')">Contest Math</button>
+        <button class="btn" onclick="alert('Algebra')">Algebra</button>
+        <button class="btn" onclick="showMainButtons()">Back</button>
+    </div>
+
+    <div id="coding-buttons" class="hidden">
+        <button class="btn" onclick="alert('Python')">Python</button>
+        <button class="btn" onclick="alert('JavaScript')">JavaScript</button>
+        <button class="btn" onclick="alert('HTML & CSS')">HTML & CSS</button>
+        <button class="btn" onclick="showMainButtons()">Back</button>
+    </div>
+
+    <div id="science-buttons" class="hidden">
+        <button class="btn" onclick="alert('Physics')">Physics</button>
+        <button class="btn" onclick="alert('Chemistry')">Chemistry</button>
+        <button class="btn" onclick="alert('Biology')">Biology</button>
+        <button class="btn" onclick="showMainButtons()">Back</button>
+    </div>
+</div>
+
+<script>
+    function showSubButtons(category) {
+        document.getElementById('main-buttons').classList.add('hidden');
+        document.getElementById(category + '-buttons').classList.remove('hidden');
+    }
+
+    function showMainButtons() {
+        document.querySelectorAll('.hidden').forEach(el => el.classList.add('hidden'));
+        document.getElementById('main-buttons').classList.remove('hidden');
+    }
+</script>
+
 </body>
 </html>
