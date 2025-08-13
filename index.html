@@ -1,91 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theme Selector</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-        }
-        .container {
-            margin: 20px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            color: white;
-            background-color: #007BFF;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SVG Block Editor - Nested & Snapping (Fixed)</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <header>
-    <h1>Welcome to the Theme Selector</h1>
+  <h1>SVG Block Editor</h1>
+  <div class="header-controls">
+<button id="exportBtn">Export</button>
+<button id="importBtn">Import</button>
+<input type="file" id="importFile" style="display:none" accept=".json" />
+
+    <button id="newBlockBtn">New Block</button>
+    <button id="saveBtn">Save</button>
+    <button id="clearBtn">Clear</button>
+    <button id="generateBtn">Generate Code</button>
+    <select id="langSelect">
+      <option value="javascript">JavaScript</option>
+      <option value="python">Python</option>
+      <option value="c">C-like</option>
+    </select>
+<select id="exportMenu">
+  <option value="">Export / Import</option>
+  <option value="export-blocks">Export Custom Blocks</option>
+  <option value="export-workspace">Export Workspace</option>
+  <option value="export-project">Export Full Project</option>
+  <option value="import">Import JSON</option>
+</select>
+<input type="file" id="importFile" accept=".json" style="display:none" />
+
+  </div>
+  <div id="trash" title="Drag blocks here or outside workspace to delete">🗑️</div>
 </header>
 
-<div class="container">
-    <div id="main-buttons">
-        <button class="btn" onclick="showSubButtons('math')">Math</button>
-        <button class="btn" onclick="showSubButtons('coding')">Coding</button>
-        <button class="btn" onclick="showSubButtons('science')">Science</button>
-    </div>
+<main>
+  <aside id="palette" class="palette"></aside>
+  <div id="workspaceContainer" class="workspace-container">
+    <svg id="workspace" width="1600" height="1400"></svg>
+  </div>
+</main>
 
-    <div id="math-buttons" class="hidden">
-        <button class="btn" onclick="alert('Geometry')">Geometry</button>
-        <button class="btn" onclick="alert('Contest Math')">Contest Math</button>
-        <button class="btn" onclick="alert('Algebra')">Algebra</button>
-        <button class="btn" onclick="showMainButtons()">Back</button>
-    </div>
+<!-- Block Designer Modal -->
+<div id="blockDesigner" class="modal">
+  <div class="modal-content">
+    <h2>Create Custom Block</h2>
+    <label>Block Label (use %varName for inputs):<br/>
+      <input type="text" id="blockLabel" placeholder="say %text" />
+    </label>
+    <label>Block Type:
+      <select id="blockType">
+        <option value="command">Command</option>
+        <option value="reporter">Reporter</option>
+        <option value="boolean">Boolean</option>
 
-    <div id="coding-buttons" class="hidden">
-        <button class="btn" onclick="alert('Python')">Python</button>
-        <button class="btn" onclick="alert('JavaScript')">JavaScript</button>
-        <button class="btn" onclick="alert('HTML & CSS')">HTML & CSS</button>
-        <button class="btn" onclick="showMainButtons()">Back</button>
+        <option value="container">Container (e.g. loops)</option>
+      </select>
+    </label>
+    <label>Block Color:
+      <input type="color" id="blockColor" value="#4C97FF" />
+    </label>
+    <label>Template JavaScript:<br/>
+      <textarea id="templateJS" rows="3" placeholder="console.log('%text');"></textarea>
+    </label>
+    <label>Template Python:<br/>
+      <textarea id="templatePy" rows="3" placeholder="print('%text')"></textarea>
+    </label>
+    <label>Template C-like:<br/>
+      <textarea id="templateC" rows="3" placeholder="printf(\"%text\");"></textarea>
+    </label>
+    <div class="designer-buttons">
+      <button id="addBlockBtn">Add Block</button>
+      <button id="closeDesignerBtn">Close</button>
     </div>
-
-    <div id="science-buttons" class="hidden">
-        <button class="btn" onclick="alert('Physics')">Physics</button>
-        <button class="btn" onclick="alert('Chemistry')">Chemistry</button>
-        <button class="btn" onclick="alert('Biology')">Biology</button>
-        <button class="btn" onclick="showMainButtons()">Back</button>
-    </div>
+  </div>
 </div>
 
-<script>
-    function showSubButtons(category) {
-        document.getElementById('main-buttons').classList.add('hidden');
-        document.getElementById(category + '-buttons').classList.remove('hidden');
-    }
+<!-- Code Output Modal -->
+<div id="codeOutput" class="modal">
+  <div class="modal-content">
+    <h2>Generated Code</h2>
+    <pre id="codeArea"></pre>
+    <button id="closeCodeOutputBtn">Close</button>
+  </div>
+</div>
 
-    function showMainButtons() {
-        document.querySelectorAll('.hidden').forEach(el => el.classList.add('hidden'));
-        document.getElementById('main-buttons').classList.remove('hidden');
-    }
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
