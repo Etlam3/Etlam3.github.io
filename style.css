@@ -1,0 +1,172 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+}
+
+header {
+  background: #222;
+  color: white;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+header h1 {
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.header-controls {
+  display: flex;
+  gap: 8px;
+  margin-left: 8px;
+  align-items: center;
+}
+
+header button, header select {
+  padding: 6px 10px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: none;
+  background: #4C97FF;
+  color: white;
+  cursor: pointer;
+}
+
+header button#clearBtn {
+  background: #d9534f;
+}
+
+#trash {
+  margin-left: auto;
+  font-size: 1.25rem;
+  cursor: default;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.06);
+}
+
+main {
+  display: flex;
+  height: calc(100vh - 60px);
+}
+
+.palette {
+  width: 240px;
+  background: #fff;
+  border-right: 1px solid #ccc;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.palette .palette-block {
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  color: white;
+  cursor: grab;
+  user-select: none;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.workspace-container {
+  flex: 1;
+  background: white;
+  position: relative;
+  overflow: auto;
+}
+
+svg#workspace {
+  width: 100%;
+  height: 100%;
+  background: #fbfdff;
+  user-select: none;
+}
+
+/* Block appearance */
+.block {
+  cursor: grab;
+  user-select: none;
+}
+
+input.block-input {
+  width: 60px;
+  font-size: 12px;
+  border: none;
+  border-radius: 2px;
+  padding: 1px 3px;
+  text-align: center;
+  outline: none;
+  font-family: monospace;
+}
+
+/* Ensure foreignObject accepts pointer events so inputs work */
+foreignObject {
+  pointer-events: all;
+}
+
+/* Modal styling */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.modal-content {
+  background: white;
+  padding: 16px;
+  width: 420px;
+  max-width: 95vw;
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.25);
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.modal-content input[type="text"],
+.modal-content textarea,
+.modal-content select {
+  width: 100%;
+  padding: 6px 8px;
+  box-sizing: border-box;
+  margin-top: 4px;
+}
+
+.modal-content button {
+  margin-top: 8px;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  background: #4C97FF;
+  color: white;
+  border-radius: 4px;
+}
+
+/* SVG block classes */
+.block-command-rect { rx: 8; ry: 8; fill: var(--block-color); }
+.block-reporter-rect { rx: 14; ry: 14; fill: var(--block-color); }
+.block-boolean-polygon { fill: var(--block-color); }
+
+/* container inner (the inside area of container) */
+.container-inner {
+  fill: #d9e8ff88;
+  stroke-width: 2;
+  rx: 8;
+  ry: 8;
+}
+
+/* small niceties */
+.designer-buttons { display:flex; gap:8px; justify-content:flex-end; margin-top:10px; }
